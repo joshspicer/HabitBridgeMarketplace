@@ -8,7 +8,7 @@ app.init(() => {
     </div>
     <div class="hb-content">
       <blockquote class="hb-blockquote">${sentence}</blockquote>
-      <textarea id="input" class="hb-input" placeholder="Type the sentence above..."></textarea>
+      <textarea id="input" class="hb-input" placeholder="Please type the sentence above..."></textarea>
       <button class="hb-btn" onclick="check()">Submit</button>
       <div id="hb-status" class="hb-status"></div>
     </div>
