@@ -4,6 +4,16 @@
       "id": "typing-speed",
       "name": "Typing Speed Challenge",
       "description": "Type a sentence accurately and quickly to unlock your phone."
+    },
+    {
+      "id": "italian-vocab",
+      "name": "Italian Vocabulary Quiz",
+      "description": "Translate 10 random Italian verbs to English to complete the habit."
+    },
+    {
+      "id": "math-problem",
+      "name": "Math Problem Challenge",
+      "description": "Solve 5 random math problems to complete the habit."
     }
   ]
 }
