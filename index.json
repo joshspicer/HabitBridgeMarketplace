@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    {
+      "id": "typing-speed",
+      "name": "Typing Speed Challenge",
+      "description": "Type a sentence accurately and quickly to unlock your phone.",
+      "path": "typing-test/manifest.json"
+    }
+  ]
+}
