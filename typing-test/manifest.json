@@ -1,6 +1,0 @@
-{
-  "id": "typing-speed",
-  "name": "Typing Speed Challenge",
-  "description": "Type a sentence accurately and quickly to unlock your phone.",
-  "entry": "plugin.js"
-}
