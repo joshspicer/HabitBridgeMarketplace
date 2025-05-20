@@ -19,6 +19,11 @@
       "id": "italian-conjugation",
       "name": "Italian Conjugation Challenge",
       "description": "Test your Italian verb knowledge with translation and conjugation challenges."
+    },
+    {
+      "id": "morse-code",
+      "name": "Morse Code Practice",
+      "description": "Translate 10 Morse code symbols to complete the habit."
     }
   ]
 }
