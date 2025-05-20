@@ -179,9 +179,24 @@ app.init(() => {
   function shuffle(array) {
     return [...array].sort(() => Math.random() - 0.5);
   }
-  
+
   function getRandomVerb() {
     return verbs[Math.floor(Math.random() * verbs.length)];
+  }
+  
+  function isFuzzyMatch(userAnswer, correctAnswer) {
+    // Normalize both strings (lowercase, remove "to " prefix, trim)
+    const normalize = str => str.toLowerCase().replace(/^to\s+/, '').trim();
+    const normalizedUser = normalize(userAnswer);
+    const normalizedCorrect = normalize(correctAnswer);
+    
+    // Check for exact match after normalization
+    if (normalizedUser === normalizedCorrect) return true;
+    
+    // Check if one string contains the other
+    if (normalizedUser.includes(normalizedCorrect) || normalizedCorrect.includes(normalizedUser)) return true;
+    
+    return false;
   }
   
   function getRandomPerson() {
@@ -328,7 +343,7 @@ app.init(() => {
     const status = document.getElementById("hb-status");
     
     // Check if the selected option is correct
-    if (selectedTranslation === currentVerb.translation) {
+    if (selectedTranslation === currentVerb.translation || isFuzzyMatch(selectedTranslation, currentVerb.translation)) {
       status.style.color = '#27ae60';
       status.textContent = "✅ Correct! Now try conjugating this verb.";
       
