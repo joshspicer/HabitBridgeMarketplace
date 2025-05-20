@@ -14,6 +14,11 @@
       "id": "math-problem",
       "name": "Math Problem Challenge",
       "description": "Solve 5 random math problems to complete the habit."
+    },
+    {
+      "id": "italian-conjugation",
+      "name": "Italian Conjugation Challenge",
+      "description": "Test your Italian verb knowledge with translation and conjugation challenges."
     }
   ]
 }
