@@ -185,16 +185,21 @@ app.init(() => {
   }
   
   function isFuzzyMatch(userAnswer, correctAnswer) {
-    // Normalize both strings (lowercase, remove "to " prefix, trim)
+    // Normalize strings (lowercase, remove "to " prefix, trim)
     const normalize = str => str.toLowerCase().replace(/^to\s+/, '').trim();
     const normalizedUser = normalize(userAnswer);
-    const normalizedCorrect = normalize(correctAnswer);
     
-    // Check for exact match after normalization
-    if (normalizedUser === normalizedCorrect) return true;
+    // Handle multiple translations separated by '/' or ','
+    const possibleTranslations = correctAnswer.split(/[\/,]/).map(t => normalize(t));
     
-    // Check if one string contains the other
-    if (normalizedUser.includes(normalizedCorrect) || normalizedCorrect.includes(normalizedUser)) return true;
+    // Check if user's answer matches any of the possible translations
+    for (const translation of possibleTranslations) {
+      // Check for exact match after normalization
+      if (normalizedUser === translation) return true;
+      
+      // Check if one string contains the other
+      if (normalizedUser.includes(translation) || translation.includes(normalizedUser)) return true;
+    }
     
     return false;
   }
