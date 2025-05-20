@@ -1,5 +1,5 @@
 {
   "id": "morse-code",
   "name": "Morse Code Practice",
-  "description": "Translate Morse code into letters to complete this habit."
+  "description": "Translate Morse code into letters with audio support to complete this habit."
 }

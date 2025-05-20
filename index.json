@@ -23,7 +23,7 @@
     {
       "id": "morse-code",
       "name": "Morse Code Practice",
-      "description": "Translate 10 Morse code symbols to complete the habit."
+      "description": "Translate 10 Morse code symbols with audio support to complete the habit."
     }
   ]
 }
