@@ -261,7 +261,7 @@ app.init(() => {
           <button class="hb-option" onclick="checkTranslation('${translationOptions[2]}')">${translationOptions[2]}</button>
         </div>
         <div id="hb-status" class="hb-status"></div>
-        <div class="hb-progress">Points: ${points}/10</div>
+        <div class="hb-progress">Points: ${points}/5</div>
       </div>
       <style>
         .hb-header { text-align: center; margin-bottom: 18px; }
@@ -280,6 +280,7 @@ app.init(() => {
         .hb-status { min-height: 20px; font-size: 0.98rem; color: #e74c3c; text-align: center; margin-top: 4px; }
         .hb-progress { text-align: right; font-size: 0.95rem; color: #888; margin-top: 8px; }
         .hb-tense { font-style: italic; color: #666; margin-top: 5px; }
+        .correct-answer { margin-top: 8px; padding: 8px; background: #ffeaea; border-radius: 6px; font-size: 1.05rem; }
       </style>
     `);
   }
@@ -299,7 +300,7 @@ app.init(() => {
         <input id="input" class="hb-input" placeholder="Type the conjugated form..." autocomplete="off" />
         <button class="hb-btn" onclick="checkConjugation()">Submit</button>
         <div id="hb-status" class="hb-status"></div>
-        <div class="hb-progress">Points: ${points}/10</div>
+        <div class="hb-progress">Points: ${points}/5</div>
       </div>
       <style>
         .hb-header { text-align: center; margin-bottom: 18px; }
@@ -318,6 +319,7 @@ app.init(() => {
         .hb-status { min-height: 20px; font-size: 0.98rem; color: #e74c3c; text-align: center; margin-top: 4px; }
         .hb-progress { text-align: right; font-size: 0.95rem; color: #888; margin-top: 8px; }
         .hb-tense { font-style: italic; color: #666; margin-top: 5px; }
+        .correct-answer { margin-top: 8px; padding: 8px; background: #ffeaea; border-radius: 6px; font-size: 1.05rem; }
       </style>
     `);
     document.getElementById("input").focus();
@@ -330,7 +332,7 @@ app.init(() => {
       </div>
       <div class="hb-content">
         <div class="hb-status" style="color:#27ae60;">
-          Bravo! You scored all 10 points!
+          Bravo! You scored all 5 points!
         </div>
       </div>
       <style>
@@ -358,7 +360,7 @@ app.init(() => {
       }, 1000);
     } else {
       status.style.color = '#e74c3c';
-      status.textContent = `❌ Incorrect. "${currentVerb.infinitive}" means "${currentVerb.translation}"`;
+      status.innerHTML = `❌ Incorrect.<br><div class="correct-answer">Correct answer: <strong>"${currentVerb.translation}"</strong></div>`;
       
       // Move to next question after delay
       setTimeout(() => {
@@ -394,7 +396,7 @@ app.init(() => {
       status.textContent = "✅ Correct!";
       
       setTimeout(() => {
-        if (points >= 10) {
+        if (points >= 5) {
           renderCompletionUI();
         } else {
           setupTranslationPhase();
@@ -402,7 +404,7 @@ app.init(() => {
       }, 1000);
     } else {
       status.style.color = '#e74c3c';
-      status.textContent = `❌ Incorrect. The correct form is: "${correctConjugation}"`;
+      status.innerHTML = `❌ Incorrect.<br><div class="correct-answer">Correct answer: <strong>"${correctConjugation}"</strong></div>`;
       
       setTimeout(() => {
         setupTranslationPhase();
