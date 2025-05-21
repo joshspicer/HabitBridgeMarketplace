@@ -24,6 +24,56 @@
       "id": "morse-code",
       "name": "Morse Code Practice",
       "description": "Translate 10 Morse code symbols with audio support to complete the habit."
+    },
+    {
+      "id": "riddles-challenge",
+      "name": "Riddles Challenge",
+      "description": "Solve 5 brain-teasing riddles to complete the habit."
+    },
+    {
+      "id": "memory-sequence",
+      "name": "Memory Sequence",
+      "description": "Test your short-term memory by remembering sequences of colors and shapes."
+    },
+    {
+      "id": "meditation-timer",
+      "name": "Meditation Timer",
+      "description": "Practice mindful breathing with a guided meditation timer for 2-5 minutes."
+    },
+    {
+      "id": "geography-quiz",
+      "name": "Geography Quiz",
+      "description": "Test your knowledge of world capitals and geography with this 5-question quiz."
+    },
+    {
+      "id": "word-scramble",
+      "name": "Word Scramble",
+      "description": "Unscramble 5 jumbled words to complete the challenge and train your brain."
+    },
+    {
+      "id": "daily-gratitude",
+      "name": "Daily Gratitude",
+      "description": "Practice gratitude by reflecting on and writing down three things you're grateful for today."
+    },
+    {
+      "id": "vocabulary-builder",
+      "name": "Vocabulary Builder",
+      "description": "Expand your vocabulary by matching advanced words with their correct definitions."
+    },
+    {
+      "id": "quick-stretch",
+      "name": "Quick Stretch",
+      "description": "Follow a simple 3-minute stretching routine to improve flexibility and reduce tension."
+    },
+    {
+      "id": "logic-puzzles",
+      "name": "Logic Puzzles",
+      "description": "Solve 3 engaging logic puzzles that will challenge your critical thinking skills."
+    },
+    {
+      "id": "quote-reflection",
+      "name": "Quote Reflection",
+      "description": "Enhance mindfulness by reflecting on an inspiring quote for a few minutes."
     }
   ]
 }
