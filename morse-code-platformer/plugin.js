@@ -47,6 +47,7 @@ app.init(() => {
   let levelWidth = 10;
   let levelCompleted = false;
   let totalLevels = 3;
+  let lives = 3; // Add lives system
   
   // Generate random platform layout for procedural generation
   function generateLevel(level) {
@@ -78,6 +79,7 @@ app.init(() => {
     targetLetter = getRandomLetter();
     currentMorseInput = '';
     levelWidth = generateLevel(currentLevel).length;
+    lives = 3; // Reset lives for new level
     render();
   }
   
@@ -87,13 +89,14 @@ app.init(() => {
     if (currentMorseInput === correctMorse) {
       // Correct! Move player forward
       playerPosition = Math.min(playerPosition + 2, levelWidth - 1);
+      showFeedback('✅ Correct!', '#27ae60');
       
       // Check if level completed
       if (playerPosition >= levelWidth - 1) {
         levelCompleted = true;
         if (currentLevel >= totalLevels) {
           // Game completed!
-          renderCompletion();
+          setTimeout(() => renderCompletion(), 1000);
           return;
         } else {
           currentLevel++;
@@ -109,8 +112,16 @@ app.init(() => {
       currentMorseInput = '';
     } else if (currentMorseInput.length >= correctMorse.length || 
                !correctMorse.startsWith(currentMorseInput)) {
-      // Wrong input - move player backward
-      playerPosition = Math.max(playerPosition - 1, 0);
+      // Wrong input - lose a life and possibly move backward
+      lives--;
+      
+      if (lives <= 0) {
+        // Move backward when out of lives
+        playerPosition = Math.max(playerPosition - 1, 0);
+        lives = 3; // Reset lives
+      }
+      
+      showFeedback(`❌ Wrong! ${lives > 0 ? `Lives: ${lives}` : 'Step back!'} Correct: ${correctMorse}`, '#e74c3c');
       currentMorseInput = '';
       
       // Get new target letter after wrong answer
@@ -118,6 +129,19 @@ app.init(() => {
     }
     
     render();
+  }
+  
+  function showFeedback(message, color) {
+    const feedbackEl = document.getElementById('feedback');
+    if (feedbackEl) {
+      feedbackEl.textContent = message;
+      feedbackEl.style.color = color;
+      feedbackEl.style.opacity = '1';
+      
+      setTimeout(() => {
+        feedbackEl.style.opacity = '0';
+      }, 2000);
+    }
   }
   
   function addDot() {
@@ -165,15 +189,20 @@ app.init(() => {
             <div class="target-letter">Target: <strong>${targetLetter}</strong></div>
             <div class="morse-code">Morse: <strong>${morseCodeMap[targetLetter]}</strong></div>
             <div class="current-input">Input: <strong>${currentMorseInput || '(none)'}</strong></div>
+            <div id="feedback" class="feedback"></div>
           </div>
           
           <div class="controls">
             <button class="hb-btn morse-btn" onclick="addDot()">• (Dot)</button>
             <button class="hb-btn morse-btn" onclick="addDash()">— (Dash)</button>
           </div>
+          
+          <div class="keyboard-hint">
+            💡 Tip: Use keyboard - <kbd>.</kbd> for dot, <kbd>-</kbd> for dash
+          </div>
         </div>
         
-        <div class="hb-progress">Level ${currentLevel} of ${totalLevels} • Position: ${playerPosition + 1}/${levelWidth}</div>
+        <div class="hb-progress">Level ${currentLevel} of ${totalLevels} • Position: ${playerPosition + 1}/${levelWidth} • Lives: ${'❤️'.repeat(lives)}</div>
       </div>
       
       <style>
@@ -209,7 +238,7 @@ app.init(() => {
         
         .morse-input { background: white; padding: 16px; border-radius: 8px; border: 1px solid #e1e8ed; }
         .target-info { margin-bottom: 16px; text-align: center; }
-        .target-letter, .morse-code, .current-input { 
+        .target-letter, .morse-code, .current-input, .feedback { 
           margin: 4px 0; 
           font-size: 0.95rem; 
           color: #333;
@@ -217,6 +246,12 @@ app.init(() => {
         .target-letter strong { color: #e74c3c; font-size: 1.1rem; }
         .morse-code strong { color: #3498db; font-family: monospace; }
         .current-input strong { color: #27ae60; font-family: monospace; }
+        .feedback { 
+          font-weight: 600; 
+          transition: opacity 0.3s ease; 
+          opacity: 0; 
+          min-height: 20px; 
+        }
         
         .controls { display: flex; gap: 12px; justify-content: center; }
         .morse-btn { 
@@ -236,6 +271,21 @@ app.init(() => {
         .morse-btn:active { 
           background: linear-gradient(90deg, #3a6fd8 0%, #4F8EF7 100%); 
           box-shadow: 0 1px 4px 0 rgba(80,120,200,0.10); 
+        }
+        
+        .keyboard-hint { 
+          text-align: center; 
+          font-size: 0.85rem; 
+          color: #888; 
+          margin-top: 8px; 
+        }
+        .keyboard-hint kbd { 
+          background: #f4f4f4; 
+          border: 1px solid #ccc; 
+          border-radius: 3px; 
+          padding: 2px 6px; 
+          font-size: 0.8rem; 
+          font-family: monospace; 
         }
         
         .hb-progress { text-align: center; font-size: 0.95rem; color: #888; margin-top: 8px; }
@@ -268,6 +318,17 @@ app.init(() => {
   // Make functions available globally
   window.addDot = addDot;
   window.addDash = addDash;
+  
+  // Add keyboard support
+  document.addEventListener('keydown', (event) => {
+    if (event.key === '.' || event.key === 'Comma' || event.code === 'Period') {
+      event.preventDefault();
+      addDot();
+    } else if (event.key === '-' || event.key === 'Minus' || event.code === 'Minus') {
+      event.preventDefault();
+      addDash();
+    }
+  });
   
   // Start the game
   startNewLevel();
