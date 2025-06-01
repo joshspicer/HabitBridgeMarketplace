@@ -71,6 +71,11 @@
       "description": "Solve 3 engaging logic puzzles that will challenge your critical thinking skills."
     },
     {
+      "id": "morse-code-platformer",
+      "name": "Morse Code Platformer",
+      "description": "Learn morse code by controlling a character through platformer levels using morse code inputs."
+    },
+    {
       "id": "quote-reflection",
       "name": "Quote Reflection",
       "description": "Enhance mindfulness by reflecting on an inspiring quote for a few minutes."
